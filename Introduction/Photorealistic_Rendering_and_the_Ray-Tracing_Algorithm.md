@@ -17,13 +17,13 @@
 ## 相机
 几乎每个人都使用过相机，并熟悉其基本功能：您表示您想要录制世界图像（通常通过按下按钮或点击屏幕），并且图像被记录在一张胶片或电子传感器上。最简单的拍照装置之一叫做针孔相机。针孔摄像机由一端有一个小孔的光密盒组成（图1.1）。当孔被揭开时，光线进入这个孔，落在贴在盒子另一端的一张摄影纸上。尽管它简单，这种相机仍然使用今天，经常为艺术目的。需要很长的曝光时间，以获得足够的光线在胶片上形成图像。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Pinhole Camera.svg">图1.1：针孔摄像机。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Pinhole%20Camera.svg">图1.1：针孔摄像机。</img>
 
 尽管大多数摄像机比针孔摄像机复杂得多，但它是模拟的方便起点。摄像机最重要的功能是定义将录制到胶片上的场景部分。在图 1.1中，我们可以看到将针孔连接到胶片边缘如何创建一个延伸至场景的双金字塔。无法将不在此金字塔内的对象成像到胶片上。由于实际摄像机的图像形状比金字塔复杂，因此我们将引用可能作为观看量在胶片上成像的空间区域。
 
 另一种考虑针孔相机的方法是将胶片平面放在针孔前面，但距离相同（图1.2）。请注意，将孔连接到胶片定义与以前完全相同的观看音量。当然，这不是构建真实相机的实用方法，但出于仿真目的，它是一种方便的抽象。当薄膜（或图像）平面位于针孔前面时，针孔通常被称为"眼睛"。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Film in front.svg">图1.2：当我们模拟针孔相机时，我们把胶片放在靠近平面的孔前面，孔改名为眼睛。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Film%20in%20front.svg">图1.2：当我们模拟针孔相机时，我们把胶片放在靠近平面的孔前面，孔改名为眼睛。</img>
 
 现在我们来讨论渲染的关键问题：在图像的每个点，相机会记录什么颜色值？如果我们回想起原始的针孔相机，很明显，只有沿着针孔和胶片上的一个点之间的矢量传播光线才能对胶片位置造成帮助。在我们的模拟相机与胶片平面在眼睛前，我们感兴趣的光量从图像点到眼睛。
 
@@ -58,11 +58,11 @@ pbrt的几何界面及其各种形状的实现在第3章中介绍，加速度界
 
 我们经常想知道在交点周围的差分区域沉积的光功率量（图1.3）。我们将假设点光源具有一些与$\Phi$，并且它在所有方向上均等地辐射光。这意味着光周围的单位球体上每个区域的功率是正常的$\frac{\Phi}{4\pi}$。（这些测量将在第5.4 节中解释和正式化 。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Basic reflection setting.svg">图 1.3：用于确定由于点光源而到达一个点的每个区域的功率的几何结构。从点到光源的距离用$r$。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Basic%20reflection%20setting.svg">图 1.3：用于确定由于点光源而到达一个点的每个区域的功率的几何结构。从点到光源的距离用$r$。</img>
 
 如果我们考虑两个这样的球体（图1.4），很明显，在较大球体上一个点的面积的功率必须小于小球体上一个点的功率，因为相同的总功率分布在较大的区域上。具体地说，到达半径区域$r$上的点每个区域的功率$\frac{1}{r^2}$。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Light spheres equal power.svg">图1.4：由于点光在所有方向均等地辐射光，因此相同的总功率沉积在以光为中心的所有球体上。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Light%20spheres%20equal%20power.svg">图1.4：由于点光在所有方向均等地辐射光，因此相同的总功率沉积在以光为中心的所有球体上。</img>
 
 此外，可以表明，如果微小的表面斑块$dA$倾斜的角度$\theta$表面点到光向量，则沉积在$d$上功率$A$与余弦$cos \theta$。综合起来，每个面积的微分功率$dE$（*微分辐照度*） 是
 
@@ -75,14 +75,14 @@ $$dE = \frac{\Phi cos \theta}{4 \pi r^2}.$$
 ## 可见性
 上一节中描述的照明分布忽略了一个非常重要的组件：阴影。只有当从点到光的位置的路径畅通无阻时，每个光源才对点进行着色（图1.5）。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Two lights one blocker.svg">图 1.5：光源只有在从接收点看光源没有被遮挡的情况下才会在表面上沉积能量。左边的光源照亮这个点$p$，但是右边的光源没有。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Two%20lights%20one%20blocker.svg">图 1.5：光源只有在从接收点看光源没有被遮挡的情况下才会在表面上沉积能量。左边的光源照亮这个点$p$，但是右边的光源没有。</img>
 
 幸运的是，在光线追踪器中，很容易确定光线是否从着色点可见。我们只需构造一条新射线，其原点位于表面点，其方向指向光。这些特殊的光线被称为*阴影射线*。如果我们在环境中跟踪此光线，我们可以通过比较沿光源位置的光线找到的任何交集$t$来检查是否找到光线原点和光源之间的任何交点$t$。如果光和表面之间没有阻塞对象，则包括光的贡献。
 
 ## 表面散射
 现在，我们能够计算两条信息，这些信息对于正确着色一个点至关重要：其位置和事件照明。†现在我们需要确定事件照明是如何分散在表面的。具体来说，我们对散落在光线上的光能量感兴趣，我们最初跟踪的光线会找到交点点，因为光线通向相机（图1.6）。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Surface scattering geometry.svg">图1.6：曲面散射的几何。事件光到达沿$\omega_i$与表面在点$p$和分散回相机沿方向$\omega_o$射向摄像机的光量由射点光能和 BRDF 的倍数提供。</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Surface%20scattering%20geometry.svg">图1.6：曲面散射的几何。事件光到达沿$\omega_i$与表面在点$p$和分散回相机沿方向$\omega_o$射向摄像机的光量由射点光能和 BRDF 的倍数提供。</img>
 
 场景中的每个对象都提供一个材质，该材质描述其在曲面上每个点上的外观属性。此描述由*双向反射分布函数*（BRDF） 给出。这个函数告诉我们有多少能量从传入方向$\omega_i$反射到传出方向$\omega_o$。我们将BRDF写成在$p$的$f_r(p, \omega_o, \omega_i)$。现在，计算散射到相机光量非常简单：
 ```
@@ -99,8 +99,8 @@ $$dE = \frac{\Phi cos \theta}{4 \pi r^2}.$$
 ## 间接光传输
 Turner Whitted关于光线追踪的原始论文（1980年）强调了其递归性，这是使间接镜面反射和渲染图像传输成为可能的关键。例如，如果来自相机的光线像镜子一样击中闪亮的物体，我们可以在交点处反射有关表面法线的光线，并递归地调用光线追踪例程来查找到达镜像点上的光线，从而将其贡献添加到原始摄像机光线中。这种技术可用于跟踪与透明对象相交的传输光线。长期以来，大多数早期的光线追踪示例都展示了镜子和玻璃球（图1.7），因为这些类型的效果很难用其他渲染技术捕捉。
 
-![Whitted光线追踪](../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/spheres-whitted.png)
-![随机渐进光子映射](../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/spheres-sppm.png)
+![Whitted光线追踪](https://www.pbr-book.org/3ed-2018/Introduction/spheres-whitted.png)
+![随机渐进光子映射](https://www.pbr-book.org/3ed-2018/Introduction/spheres-sppm.png)
 图 1.7：原型早期光线追踪场景。请注意使用镜像对象和玻璃对象，这强调了算法处理这些类型的曲面的能力。（1） 使用Whitted光线追踪进行渲染，（2）使用随机逐行光子映射 （SPPM） 渲染 ， 这是一种高级光传输算法，将在第 16.2 节中引入。SPPM 能够精确模拟穿过球体的焦散。
 
 通常，从物体上某个点到达相机的光量由物体（如果它本身是光源）发出的光与反射光量之和给出。 这个想法由*光传输方程*（也通常称为*渲染方程*）给出，该方程式表示从某个方向上的点发出的辐射$L_o(p, \omega_o)$是该$\omega_o$方向上该点$p$处的发射辐射$L_e(p, \omega_o)$，加上$p$周围球面$S^2$上来自各个方向的入射辐射率以BSDF和余弦项进行换算：
@@ -115,18 +115,18 @@ Whitted的方法可以扩展，以捕捉更多的效果，而不仅仅是完美�
 
 当我们以这种方式递归地跟踪光线时，我们确实将*光线树*与每个图像位置（图1.8）与来自摄像机的光线与树根处的光线关联。此树中的每一条射线都可以具有与之关联的权重;这允许我们建模，例如，不反映100%的入射光的闪亮表面。
 
-<img src="../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/Ray Tree.svg">图 1.8：递归光线追踪将整个光线树与每个图像位置关联</img>
+<img src="https://www.pbr-book.org/3ed-2018/Introduction/Ray%20Tree.svg">图 1.8：递归光线追踪将整个光线树与每个图像位置关联</img>
 
 ## 光线传播
 到目前为止的讨论假定光线正在真空中传播。例如，在描述来自点光源的光分布时，我们假设光的功率在以光为中心的球体表面上均等分布，而不会沿途减小。参与媒体（如*烟*、*雾*或*0灰尘*）的存在可能会使这一假设无效。这些效果对于模拟非常重要：即使我们不渲染充满烟雾的房间，几乎所有室外场景都受到参与媒体的严重影响。例如，地球大气层使距离较远的物体看起来饱和度较低（图1.9）。
 
-![无大气散射](../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/ecosys-nofog.png)
-![带大气散射](../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/ecosys-fog.png)
+![无大气散射](https://www.pbr-book.org/3ed-2018/Introduction/ecosys-nofog.png)
+![带大气散射](https://www.pbr-book.org/3ed-2018/Introduction/ecosys-fog.png)
 图1.9：地球大气随距离而降低饱和度。（1） 渲染场景时不模拟这种现象，而 （2） 包含大气模型。这种大气衰减是查看真实场景时的重要深度提示，为第二次渲染添加了比例感。
 
 参与介质有两种方式可以影响沿射线传播的光线。首先，介质可以通过吸收或分散在不同的方向来熄灭（或衰减）光。我们可以通过计算射线原点和*交点*$T$来捕获此效果。透射性告诉我们在交点散射的光有多少会回到光线原点。
 
 参与介质还可以沿光线向光线添加光线。如果介质发出光（如火焰），或者介质沿光线从其他方向散射光（图1.10），就会发生这种情况。我们可以通过数值计算体积光传输方程来找到这个数量，就像我们评估光传输方程来查找从表面反射的光量一样。我们将把参与媒体和卷呈现的描述留到第11章和第15章。现在，只要说我们可以计算参与媒体的效果，并将其效果融入光线携带的光量中就够了。
 
-![透过雾聚焦在球上](../img/Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm/spotfog.png)
+![透过雾聚焦在球上](https://www.pbr-book.org/3ed-2018/Introduction/spotfog.png)
 图1.10：透过雾聚焦在球上。请注意，由于参与介质中的额外散射，聚光灯的照明分布形状和球体的阴影清晰可见。
