@@ -5,7 +5,7 @@
 
 * [在线版前言]()
 
-1.  [简介]()
+1.  [简介](Introduction/index.md)
     1. [文性编程]()
     2. [真实感渲染和光线追踪算法](Introduction/Photorealistic_Rendering_and_the_Ray-Tracing_Algorithm.md)
     3. [pbrt 系统概述]()
